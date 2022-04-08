@@ -180,4 +180,41 @@ describe('Central de Atendimento ao Cliente TAT', function() {
             .select(1)
             .should('have.value', 'blog')
     })
+
+    it('marca o tipo de atendimento Feedback', function() {
+        cy.get('#support-type > :nth-child(4) > input')
+            .check()
+            .should('be.checked')
+            .should('have.value', 'feedback')
+        cy.get('#support-type > :nth-child(2) > input')
+            .should('not.be.checked')
+        cy.get('#support-type > :nth-child(3) > input')
+            .should('not.be.checked')
+    })
+
+    it('marca cada tipo de atendimento sem each ou wrap', function() {
+        cy.get('#support-type > :nth-child(4) > input')
+            .check()
+            .should('be.checked')
+            .should('have.value', 'feedback')
+        cy.get('#support-type > :nth-child(2) > input')
+            .check()
+            .should('be.checked')
+            .should('have.value', 'ajuda')
+        cy.get('#support-type > :nth-child(3) > input')
+            .check()
+            .should('be.checked')
+            .should('have.value', 'elogio')
+    })
+
+    it('marca cada tipo de atendimento com each e wrap', function() {
+        cy.get('input[type="radio"]')
+            .should('have.length', 3)
+            .each(function($radio) {
+                cy.wrap($radio)
+                    .check()
+                cy.wrap($radio)
+                    .should('be.checked')
+            })
+    })
 })
