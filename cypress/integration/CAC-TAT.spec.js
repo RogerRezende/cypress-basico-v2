@@ -8,6 +8,15 @@ describe('Central de Atendimento ao Cliente TAT', function() {
             .should('be.equal', 'Central de Atendimento ao Cliente TAT')
     })
 
+    it('preenche os campos referentes ao nome do usuário', function() {
+        cy.get('#firstName')
+            .type('Bruce')
+            .should('have.value', 'Bruce')
+        cy.get('#lastName')
+            .type('Wayne')
+            .should('have.value', 'Wayne')
+    })
+
     it('preenche os campos obrigatórios e envia o formulário', function() {
         cy.get('#firstName')
             .type('Bruce', {delay: 0})
